@@ -1,24 +1,51 @@
 import './App.css';
-import {createBrowserRouter, NavLink, Outlet, RouterProvider, useParams} from "react-router";
+import {createBrowserRouter, NavLink, Outlet, RouterProvider, useLocation, useParams} from "react-router";
 import {TodoList} from "./components/TodoList";
-import {TodoGroup} from "./components/TodoGroup";
+import {Layout, Menu, Typography} from 'antd';
+import {HomeOutlined, InfoCircleOutlined, UnorderedListOutlined} from '@ant-design/icons';
+
+const {Header, Sider, Content, Footer} = Layout;
+const {Title} = Typography;
 
 function DefaultLayout() {
-    return <>
-        <header>
-            <nav>
-                <ul>
-                    <li><NavLink to={'/'}>Home</NavLink></li>
-                    <li><NavLink to={'/todos'}>Todo List</NavLink></li>
-                    <li><NavLink to={'/about'}>About</NavLink></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <Outlet></Outlet>
-        </main>
-        <footer>footer copyright</footer>
-    </>;
+    const location = useLocation();
+    
+    const menuItems = [
+        {
+            key: '/',
+            icon: <HomeOutlined />,
+            label: <NavLink to={'/'}>Home</NavLink>,
+        },
+        {
+            key: '/todos',
+            icon: <UnorderedListOutlined />,
+            label: <NavLink to={'/todos'}>Todo List</NavLink>,
+        },
+        {
+            key: '/about',
+            icon: <InfoCircleOutlined />,
+            label: <NavLink to={'/about'}>About</NavLink>,
+        },
+    ];
+
+    return (
+            <Layout>
+                <Header>
+                <Menu
+                    mode="horizontal"
+                    theme="dark"
+                    selectedKeys={[location.pathname]}
+                    items={menuItems}
+                />
+                </Header>
+                <Content>
+                    <Outlet />
+                </Content>
+                <Footer>
+                    Todo App
+                </Footer>
+            </Layout>
+    );
 }
 
 function ErrorPage() {
@@ -28,14 +55,18 @@ function ErrorPage() {
 function TodoDetail() {
     const {key} = useParams()
     console.log(key)
-    return <h1>This is : {key} Detail</h1>;
+    return (
+        <div>
+            <Title level={2}>Todo 详情</Title>
+            <p>Todo ID: {key}</p>
+        </div>
+    );
 }
 
 const routes = [
     {
         path: '/',
         element: <DefaultLayout/>,
-        errorElement: <ErrorPage/>,
         children: [{
             path: '',
             element: <h1>Home Page</h1>,
