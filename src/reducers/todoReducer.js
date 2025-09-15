@@ -16,13 +16,11 @@ export const todoReducer = (state, action) => {
                 return todo;
             });
         case 'ADD':
-            return [...state, {
-                id: action.id,
-                text: action.text,
-                done: false
-            }];
+            return [...state, action.todo];
         case 'DELETE':
             return state.filter(todo => todo.id !== action.id);
+        case 'LOAD_TODOS':
+            return action.todos
         default:
             return state;
     }
