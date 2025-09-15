@@ -1,5 +1,5 @@
 import './App.css';
-import {createBrowserRouter, NavLink, Outlet, RouterProvider} from "react-router";
+import {createBrowserRouter, NavLink, Outlet, RouterProvider, useParams} from "react-router";
 import {TodoList} from "./components/TodoList";
 import {TodoGroup} from "./components/TodoGroup";
 
@@ -25,6 +25,12 @@ function ErrorPage() {
     return <h1>Error Page</h1>;
 }
 
+function TodoDetail() {
+    const {key} = useParams()
+    console.log(key)
+    return <h1>This is : {key} Detail</h1>;
+}
+
 const routes = [
     {
         path: '/',
@@ -36,6 +42,10 @@ const routes = [
         }, {
             path: 'todos',
             element: <TodoList/>,
+
+        }, {
+            path: 'todos/:key',
+            element: <TodoDetail />,
         }, {
             path: 'about',
             element: <h1>About Us</h1>
