@@ -24,18 +24,11 @@ jobs:
   sonar:
     needs: build
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # SonarCloud需要完整的Git历史
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+          fetch-depth: 0
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -46,29 +39,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+      - name: Build project
+        run: npm run build
 
-      - name: Install SonarScanner
-        run: |
-          # 下载最新版本的 SonarScanner (支持 Java 17+)
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-          unzip sonar-scanner-cli-5.0.1.3006-linux.zip
-          sudo mv sonar-scanner-5.0.1.3006-linux /opt/sonar-scanner
-          echo "/opt/sonar-scanner/bin" >> $GITHUB_PATH
-          # 确保使用正确的 Java 版本
-          echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
-
-      - name: Build and analyze with SonarCloud
-        run: |
-          export JAVA_HOME=$JAVA_HOME
-          sonar-scanner -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.host.url=https://sonarcloud.io
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          JAVA_HOME: ${{ env.JAVA_HOME }}
 
