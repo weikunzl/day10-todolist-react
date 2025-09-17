@@ -8,12 +8,12 @@ echo "正在安装 SonarScanner..."
 # 检测操作系统
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS
-    SONAR_SCANNER_VERSION="4.8.0.2856"
+    SONAR_SCANNER_VERSION="5.0.1.3006"
     DOWNLOAD_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-macosx.zip"
     EXTRACT_DIR="sonar-scanner-${SONAR_SCANNER_VERSION}-macosx"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux
-    SONAR_SCANNER_VERSION="4.8.0.2856"
+    SONAR_SCANNER_VERSION="5.0.1.3006"
     DOWNLOAD_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux.zip"
     EXTRACT_DIR="sonar-scanner-${SONAR_SCANNER_VERSION}-linux"
 else
