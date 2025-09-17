@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sonar": "sonar-scanner -Dsonar.login=$SONAR_TOKEN"
+    "sonar": "sonar-scanner -Dsonar.login=$SONAR_TOKEN -Dsonar.host.url=https://sonarcloud.io"
   },
   "eslintConfig": {
     "extends": [

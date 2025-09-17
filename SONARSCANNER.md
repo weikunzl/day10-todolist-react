@@ -34,8 +34,9 @@ export SONAR_ORGANIZATION=your_organization_key
 
 ### 3. 更新配置文件
 编辑 `sonar-project.properties` 文件，更新以下配置：
-- `sonar.projectKey`: 项目唯一标识符
-- `sonar.organization`: 您的 SonarCloud 组织 key
+- `sonar.projectKey`: 项目唯一标识符 (已配置为: weikunzl_day10-todolist-react)
+- `sonar.organization`: 您的 SonarCloud 组织 key (已配置为: weikunzl)
+- `sonar.host.url`: SonarCloud 服务器地址 (已配置为: https://sonarcloud.io)
 
 ## 使用方法
 
