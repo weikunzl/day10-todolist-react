@@ -10,7 +10,7 @@ export const TodoGroup = () => {
         getTodos().then(response => {
             dispatch({type:'LOAD_TODOS', todos: response.data})
         });
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className="todo-group">

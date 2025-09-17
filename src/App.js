@@ -4,47 +4,47 @@ import {TodoList} from "./components/TodoList";
 import {Layout, Menu, Typography} from 'antd';
 import {HomeOutlined, InfoCircleOutlined, UnorderedListOutlined} from '@ant-design/icons';
 
-const {Header, Sider, Content, Footer} = Layout;
+const {Header, Content, Footer} = Layout;
 const {Title} = Typography;
 
 function DefaultLayout() {
     const location = useLocation();
-    
+
     const menuItems = [
         {
             key: '/',
-            icon: <HomeOutlined />,
+            icon: <HomeOutlined/>,
             label: <NavLink to={'/'}>Home</NavLink>,
         },
         {
             key: '/todos',
-            icon: <UnorderedListOutlined />,
+            icon: <UnorderedListOutlined/>,
             label: <NavLink to={'/todos'}>Todo List</NavLink>,
         },
         {
             key: '/about',
-            icon: <InfoCircleOutlined />,
+            icon: <InfoCircleOutlined/>,
             label: <NavLink to={'/about'}>About</NavLink>,
         },
     ];
 
     return (
-            <Layout>
-                <Header>
+        <Layout>
+            <Header>
                 <Menu
                     mode="horizontal"
                     theme="dark"
                     selectedKeys={[location.pathname]}
                     items={menuItems}
                 />
-                </Header>
-                <Content>
-                    <Outlet />
-                </Content>
-                <Footer>
-                    Todo App
-                </Footer>
-            </Layout>
+            </Header>
+            <Content>
+                <Outlet/>
+            </Content>
+            <Footer>
+                Todo App
+            </Footer>
+        </Layout>
     );
 }
 
@@ -67,6 +67,7 @@ const routes = [
     {
         path: '/',
         element: <DefaultLayout/>,
+        errorElement: <ErrorPage />,
         children: [{
             path: '',
             element: <h1>Home Page</h1>,
@@ -76,7 +77,7 @@ const routes = [
 
         }, {
             path: 'todos/:key',
-            element: <TodoDetail />,
+            element: <TodoDetail/>,
         }, {
             path: 'about',
             element: <h1>About Us</h1>
