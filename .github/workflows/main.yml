@@ -22,7 +22,7 @@ jobs:
     - run: npm test
 
   sonar:
-    needs: test
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +34,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '20.x'
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
@@ -44,6 +44,7 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
 
       - name: Build and analyze with SonarCloud
+        uses: sonarcloud-io/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
