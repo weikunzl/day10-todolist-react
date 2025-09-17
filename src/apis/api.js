@@ -3,7 +3,7 @@ import {message} from 'antd';
 
 const instance = axios.create({
     // baseURL: 'https://68c78c8b5d8d9f5147322265.mockapi.io/a',
-    baseURL: 'http://localhost:8080/',
+    baseURL: 'https://todo-service-dev-9ce0.up.railway.app',
     headers: {
         'Content-Type': 'application/json'
     }
