@@ -31,6 +31,12 @@ jobs:
         with:
           fetch-depth: 0  # SonarCloud需要完整的Git历史
 
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
